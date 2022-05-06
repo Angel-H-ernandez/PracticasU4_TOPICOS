@@ -25,6 +25,7 @@ public class Menui {
                 case 3: menu2(); break;
                 case 4: mes(); break;
                 case 5: System.exit(0);
+                default: JOptionPane.showMessageDialog(null, "opcion ivalida");
             }
         } while (option!=5);    
     }
