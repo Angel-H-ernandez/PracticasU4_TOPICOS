@@ -47,6 +47,7 @@ public class Menui {
                 case 2:mes(); break;
                 case 3:mes(); break;
                 case 4: break;
+                default: JOptionPane.showMessageDialog(null, "opcion ivalida");
             }
         } while (option!=4);   
     }
