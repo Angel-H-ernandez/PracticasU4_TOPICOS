@@ -1,0 +1,6 @@
+menu de opciones
+registrar nombre
+registrar calif 1,2,3
+consultar
+modificar
+dardebaja alumno
