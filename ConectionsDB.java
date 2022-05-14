@@ -7,8 +7,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectionsDB {
+    Mensaje M = new Mensaje();
 
-    static final String CONTROLADOR = "com.mysql.jdbc.Driver";
+    static final String CONTROLADOR = "mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar";
+    //"com.mysql.jdbc.Driver";
     static final String URL_BASEDATOS = "jdbc:mysql://localhost/practicas";
 
 
@@ -42,5 +44,5 @@ public class ConectionsDB {
         }else{
             JOptionPane.showMessageDialog(null, "no pudimos conectarnos a las BDD");
         }
-        }
+    }
 }

@@ -1,14 +1,17 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 public class Menui {
 //objeto para operar los metodos de la clase operations
     Operations obj = new Operations();
 //contructor para llamar al menu
-    public Menui(){
+    public Menui() throws SQLException{
         menu();
     }
 //menu principal
-    public void menu() {//inicio del menu
+    public void menu() throws SQLException {//inicio del menu
         int option;
         String message = "OPCIONES \n"+
             "1. Nuevo registro \n"+
@@ -31,7 +34,7 @@ public class Menui {
         } while (option!=5);    
     }///fin del munu
 //segundo munu para cambiar las calificaciones
-    public void menu2(){//iniico del menu2
+    public void menu2() throws SQLException{//iniico del menu2
         int option;
         String message = "MODIFICAR CALIFICACION \n"+
             "1. Modificar calificacion 1 \n"+
@@ -51,7 +54,10 @@ public class Menui {
         } while (option!=4);   
     }//fin del munu2
 //metodo principal
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        Connection conex=ConectionsDB.connectionS();
+
+    
         new Menui();//llama al contructor, que asu vez llama al munu()
     }
 }
