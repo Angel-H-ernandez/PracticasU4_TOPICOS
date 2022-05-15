@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
 
 public class Operations{
 
-    Connection connection=null;
+    //Connection connection=null;
     Mensaje M = new Mensaje();
 
     public void addName() {
         try {
-            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
             PreparedStatement ps = conex.prepareStatement("insert into alumno values(?,?,?,?,?,?)");
            
             String nombre = M.Insertnombre();
@@ -39,63 +39,55 @@ public class Operations{
         //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
-    public void changeScore1() throws SQLException {
+    public void changeScore1(){
         try {
-            //connection = ConectionsDB.connectionS();
-            PreparedStatement ps;
             String nombre = M.Insertnombre();
-            int calif1 = M.newScore();
-            ps = connection.prepareStatement("UPDATE alumno SET Calif1=? WHERE Nombre="+nombre);
-            ps.setInt(3, calif1);
+            int calif1 = M.insertScore("nueva");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif1 = ? where Nombre = '"+nombre+"'");
+            ps.setInt(1, calif1);
             ps.executeUpdate();
             M.datosInsetados();
-  
         }
-       catch(NumberFormatException e){M.invalidData();}
+       catch(Exception e){System.out.println(e);}
         //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
-    public void changeScore2() throws SQLException {
+    public void changeScore2(){
         try {
-            //connection = ConectionsDB.connectionS();
-            PreparedStatement ps;
             String nombre = M.Insertnombre();
-            int calif2 = M.newScore();
-            ps = connection.prepareStatement("UPDATE alumno SET Calif2=? WHERE Nombre="+nombre);
-            ps.setInt(4, calif2);
+            int calif2 = M.insertScore("nueva");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif2 = ? where Nombre = "+nombre);
+            ps.setInt(1, calif2);
             ps.executeUpdate();
             M.datosInsetados();
-  
-
-        }catch(NumberFormatException e){M.invalidData();}
+        }catch(Exception e){System.out.println(e);}
         //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
-    public void changeScore3() throws SQLException {
+    public void changeScore3(){
         try {
-            //connection = ConectionsDB.connectionS();
-            PreparedStatement ps;
             String nombre = M.Insertnombre();
-            int calif3 = M.newScore();
-            ps = connection.prepareStatement("UPDATE alumno SET Calif3=? WHERE Nombre="+nombre);
-            ps.setInt(5, calif3);
+            int calif3 = M.insertScore("nueva");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif3 = ? where Nombre = "+nombre);
+            ps.setInt(1, calif3);
             ps.executeUpdate();
             M.datosInsetados();
-  
-
-        } catch(NumberFormatException e){M.invalidData();}
-        //finally{ConectionsDB.closeConecctionS(connection);}
+        } catch(Exception e){System.out.println(e);}
+        //finally{conex.close{}}
     }
 
     public void seeNamePoint_Average(){
         String datos="";
         try {
-            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
             PreparedStatement ps = conex.prepareStatement("select Nombre, Promedio from alumno");
             //ps.setString(1, "");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                datos += rs.getString("Nombre")+"   " + rs.getString("Promedio")+"\n";
+                datos += rs.getString("Nombre")+"   ->>>" + rs.getString("Promedio")+"\n";
             }
             JOptionPane.showMessageDialog(null, datos, "registros", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception e){System.out.println(e);}
@@ -104,11 +96,10 @@ public class Operations{
 
     public void delateRegister(){
         try {
-            //connection = ConectionsDB.connectionS();
-            PreparedStatement ps;
             String nombre = M.Insertnombre();
-            ps = connection.prepareStatement("DELETE FROM alumno WHERE Nombre = ?");
-            ps.setString(2, nombre);
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
+            PreparedStatement ps = conex.prepareStatement("delete from alumno where Nombre = ?");
+            ps.setString(1, nombre);
             ps.executeUpdate();
             M.datosInsetados();
     

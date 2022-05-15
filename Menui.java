@@ -1,5 +1,3 @@
-import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
 
 public class Menui {
@@ -44,31 +42,23 @@ public class Menui {
         do {
             option = Integer.parseInt(JOptionPane.showInputDialog(null, message));
             switch(option){//switch de las opciones disponibles
-                case 1:try {
+                case 1:
                         obj.changeScore1();
-                    } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } break;
-                case 2:try {
+                     break;
+                case 2:
                         obj.changeScore2();
-                    } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } break;
-                case 3:try {
+                   break;
+                case 3:
                         obj.changeScore3();
-                    } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } break;
+                     break; 
                 case 4: break;
                 default: JOptionPane.showMessageDialog(null, "opcion ivalida");
             }
         } while (option!=4);   
     }//fin del munu2
 //metodo principal
+//nueva bersion
     public static void main(String[] args){
         new Menui();//llama al contructor, que asu vez llama al munu()
     }
-}
+}//fin de la clase
