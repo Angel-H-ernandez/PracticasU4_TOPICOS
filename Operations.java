@@ -3,10 +3,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 //import javax.swing.JOptionPane;
 import java.lang.NumberFormatException;
-//import java.sql.DriverManager;
-//import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 //import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 public class Operations{
 
@@ -14,35 +16,32 @@ public class Operations{
     Mensaje M = new Mensaje();
 
     public void addName() {
-
         try {
-            connection = ConectionsDB.connectionS();
-            PreparedStatement ps;
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "");
+            PreparedStatement ps = conex.prepareStatement("insert into alumno values(?,?,?,?,?,?)");
            
-          //ingresar el nombre y sus tres calificaciones, el promedio se realiza en el calculo
             String nombre = M.Insertnombre();
             int calif1 = M.insertScore("1era");
             int calif2 = M.insertScore("2da");
             int calif3 = M.insertScore("3ra");
-            int promedio = (calif1+ calif2+ calif3) / 3;
-            String sql = "INSERT INTO alumno(Nombre, Calif1, Calif2, Calif3, Promedio) values(?,?,?,?,?)";
-            ps = connection.prepareStatement(sql);
+            float promedio = (calif1+calif2+calif3)/3;
+          
+            ps.setString(1,"0");
             ps.setString(2, nombre);
             ps.setInt(3, calif1);
             ps.setInt(4, calif2);
             ps.setInt(5, calif3);
-            ps.setInt(6, promedio);
+            ps.setFloat(6, promedio);
             ps.executeUpdate();
             M.datosInsetados();
-
-        } catch (SQLException e) {M.errorDB();}
+        } catch (SQLException e) {System.out.println(e);}
         catch(NumberFormatException e){M.invalidData();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
     public void changeScore1() throws SQLException {
         try {
-            connection = ConectionsDB.connectionS();
+            //connection = ConectionsDB.connectionS();
             PreparedStatement ps;
             String nombre = M.Insertnombre();
             int calif1 = M.newScore();
@@ -53,12 +52,12 @@ public class Operations{
   
         }
        catch(NumberFormatException e){M.invalidData();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
     public void changeScore2() throws SQLException {
         try {
-            connection = ConectionsDB.connectionS();
+            //connection = ConectionsDB.connectionS();
             PreparedStatement ps;
             String nombre = M.Insertnombre();
             int calif2 = M.newScore();
@@ -69,12 +68,12 @@ public class Operations{
   
 
         }catch(NumberFormatException e){M.invalidData();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
     public void changeScore3() throws SQLException {
         try {
-            connection = ConectionsDB.connectionS();
+            //connection = ConectionsDB.connectionS();
             PreparedStatement ps;
             String nombre = M.Insertnombre();
             int calif3 = M.newScore();
@@ -85,21 +84,27 @@ public class Operations{
   
 
         } catch(NumberFormatException e){M.invalidData();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
-    public void seeNamePoint_Average() throws SQLException {
+    public void seeNamePoint_Average(){
+        String datos="";
         try {
-            connection = ConectionsDB.connectionS();
-            //mostrar solo el nombre y el promedio 
-      
-        } catch(NumberFormatException e){M.invalidData();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "");
+            PreparedStatement ps = conex.prepareStatement("select Nombre, Promedio from alumno");
+            //ps.setString(1, "");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                datos += rs.getString("Nombre")+"   " + rs.getString("Promedio")+"\n";
+            }
+            JOptionPane.showMessageDialog(null, datos, "registros", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception e){System.out.println(e);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
-    public void delateRegister() throws SQLException {
+    public void delateRegister(){
         try {
-            connection = ConectionsDB.connectionS();
+            //connection = ConectionsDB.connectionS();
             PreparedStatement ps;
             String nombre = M.Insertnombre();
             ps = connection.prepareStatement("DELETE FROM alumno WHERE Nombre = ?");
@@ -108,7 +113,7 @@ public class Operations{
             M.datosInsetados();
     
         }catch(SQLException e){M.errorDB();}
-        finally{ConectionsDB.closeConecctionS(connection);}
+        //finally{ConectionsDB.closeConecctionS(connection);}
     }
    
 }
