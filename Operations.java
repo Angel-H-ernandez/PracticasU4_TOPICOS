@@ -39,6 +39,26 @@ public class Operations{
         //finally{ConectionsDB.closeConecctionS(connection);}
     }
 
+    public void changeRegister() {
+        try {
+            String nombre = M.Insertnombre();
+            int calif1 = M.insertScore("1era");
+            int calif2 = M.insertScore("2da");
+            int calif3 = M.insertScore("3ra");
+            Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif1= ?, Calif2 = ?, Calif3 = ?, Promedio = ?  where Nombre = '"+nombre+"'");
+            float promedio = (calif1+calif2+calif3)/3;
+          
+            ps.setInt(1, calif1);
+            ps.setInt(2, calif2);
+            ps.setInt(3, calif3);
+            ps.setFloat(4, promedio);
+            ps.executeUpdate();
+            M.datosInsetados();
+        } catch (Exception e) {JOptionPane.showMessageDialog(null, e, "error", JOptionPane.ERROR_MESSAGE);}
+        
+    }
+
     public void changeScore1(){
         try {
             String nombre = M.Insertnombre();
@@ -58,7 +78,7 @@ public class Operations{
             String nombre = M.Insertnombre();
             int calif2 = M.insertScore("nueva");
             Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
-            PreparedStatement ps = conex.prepareStatement("update alumno set Calif2 = ? where Nombre = "+nombre);
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif2 = ? where Nombre = '"+nombre+"'");
             ps.setInt(1, calif2);
             ps.executeUpdate();
             M.datosInsetados();
@@ -71,7 +91,7 @@ public class Operations{
             String nombre = M.Insertnombre();
             int calif3 = M.insertScore("nueva");
             Connection conex = DriverManager.getConnection("jdbc:mysql://localhost/BDPracticasU4", "root", "123456");
-            PreparedStatement ps = conex.prepareStatement("update alumno set Calif3 = ? where Nombre = "+nombre);
+            PreparedStatement ps = conex.prepareStatement("update alumno set Calif3 = ? where Nombre = '"+nombre+"'");
             ps.setInt(1, calif3);
             ps.executeUpdate();
             M.datosInsetados();

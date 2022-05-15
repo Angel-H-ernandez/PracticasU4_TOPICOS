@@ -23,7 +23,9 @@ public class Menui {
             switch(option){
                 case 1: obj.addName(); break;
                 case 2: obj.seeNamePoint_Average(); break;
-                case 3: menu2(); break;
+                case 3: obj.changeRegister();
+                //menu2(); 
+                break;
                 case 4: obj.delateRegister(); break;
                 case 5: System.exit(0);
                 default: JOptionPane.showMessageDialog(null, "opcion ivalida");
