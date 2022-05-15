@@ -1,3 +1,7 @@
+/**clase para mostrar el menu de las opciones
+ * @uthor Miguel angel Cortes Hernandez
+ * 15/may/2022*/
+
 import javax.swing.JOptionPane;
 
 public class Menui {
@@ -23,44 +27,16 @@ public class Menui {
             switch(option){
                 case 1: obj.addName(); break;
                 case 2: obj.seeNamePoint_Average(); break;
-                case 3: obj.changeRegister();
-                //menu2(); 
-                break;
+                case 3: obj.changeRegister();break;
                 case 4: obj.delateRegister(); break;
                 case 5: System.exit(0);
                 default: JOptionPane.showMessageDialog(null, "opcion ivalida");
             }
         } while (option!=5);    
     }///fin del munu
-//segundo munu para cambiar las calificaciones
-    public void menu2(){//iniico del menu2
-        int option;
-        String message = "MODIFICAR CALIFICACION \n"+
-            "1. Modificar calificacion 1 \n"+
-            "2. Modificar calificacion 2\n"+
-            "3. Modificar calificacion 3\n"+
-            "4. salir\n"+
-            "Digite una opcion.";
-        do {
-            option = Integer.parseInt(JOptionPane.showInputDialog(null, message));
-            switch(option){//switch de las opciones disponibles
-                case 1:
-                        obj.changeScore1();
-                     break;
-                case 2:
-                        obj.changeScore2();
-                   break;
-                case 3:
-                        obj.changeScore3();
-                     break; 
-                case 4: break;
-                default: JOptionPane.showMessageDialog(null, "opcion ivalida");
-            }
-        } while (option!=4);   
-    }//fin del munu2
 //metodo principal
-//nueva bersion
     public static void main(String[] args){
+        Mensaje.author();
         new Menui();//llama al contructor, que asu vez llama al munu()
     }
 }//fin de la clase

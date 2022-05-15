@@ -1,3 +1,7 @@
+/**clase para mostrar mensajes de operaciones
+ * @uthor Miguel angel Cortes Hernandez
+ * 15/may/2022*/
+
 import javax.swing.JOptionPane;
 //clase para mostrar mensajes
 public class Mensaje {
@@ -20,5 +24,8 @@ public class Mensaje {
 //retorna calificaion
     public int insertScore(String n){
         return Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese "+n+" calificacion"));
+    }
+    public static void author() {
+        JOptionPane.showMessageDialog(null, "programa realizado por: \n Miguel Angel Cortes Hernandez", "author", JOptionPane.INFORMATION_MESSAGE);
     }
 }//fin del aclase mensaje
